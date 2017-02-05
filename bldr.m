@@ -1,10 +1,10 @@
 function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
     mlcl = fopen('25.txt');
-    mlclst= fopen('25strctr.txt');
+    mlclst= fopen('25strctr.txt');     % Opens files used for sizing
  
     mlcl2 = fopen('25.txt');
-    mlclst2 = fopen('25strctr.txt');  
+    mlclst2 = fopen('25strctr.txt');   % Opens files used for reading
     
 %    mlcl = fopen('hept.txt');
 %    mlclst= fopen('heptstrctr.txt');
@@ -12,17 +12,19 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 %    mlcl2 = fopen('hept.txt');
 %    mlclst2 = fopen('heptstrctr.txt');  
    
-    chk = 0;
+    chk = 0;                          % used to see if end of file has been reached
     
-    N = 0;
-    MX = 0;
+    N = 0;                            % Size of matrix read characters from psf/pdb
+    MX = 0;                           % Candidate for above
    
-    while (chk < 3)
+    while (chk < 3)                   
     
         d = fgetl(mlcl2);
         d2 = fgetl(mlclst2);        
         
         N = N + 1;
+
+        % Read through file line by line until end, keeping track of longest line, and number of lines
         
         if ( d ~= -1 | d2 ~= -1 )
 
@@ -41,9 +43,9 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         end
     
     end
-
+    
    pdb = zeros( max(N, MX) + 2 );
-   psf = zeros( max(N, MX) + 2 );
+   psf = zeros( max(N, MX) + 2 );   % Preallocated matrices for both files that are sufficiently large
     
     j = 0;
     k = 0;    
