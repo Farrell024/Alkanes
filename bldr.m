@@ -52,7 +52,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     chk = 0;
     
-    while (chk < 3)
+    while (chk < 3)                 %read through the file but now add the character values to the pdb/psf object
     
         d = fgetl(mlcl);
         d2 = fgetl(mlclst);        
@@ -95,13 +95,13 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     N = 1;
     
-    while ( pdb(N, 1) ~= 0 )
+    while ( pdb(N, 1) ~= 0 ) % Sizes up the position matrix (rrr)
     
     N = N + 1;
     
     end
     
-    N = N - 2;
+    N = N - 2;      % Elimates the line in pdb which is unrelated to the atoms and the +1 overcount from the loop
     
     rrr = zeros(3, N);
     
@@ -109,31 +109,25 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
         j = 27;
     
-        while ( pdb(n + 1, j) == 32 )
+        while ( pdb(n + 1, j) == 32 ) % n+1 because the first line does not have atom information
         
-            j = j + 1;
+            j = j + 1;      % charge j up to the colum where the x-coordinate values start
             
         end
         
-        k = 1;
+        k = 1;      % index for character values
         
-        while ( pdb(n + 1, j) ~= 32 )
+        while ( pdb(n + 1, j) ~= 32 )   % read the nth x coordinate
         
-            x(k) = pdb(n + 1, j);
+            x(k) = pdb(n + 1, j);   
        
             k = k + 1;  
             
             j = j + 1;
     
         end
- 
-   %         if (n == 152)
-                
-    %             qrty = str2double(char(x))
-                
-     %       end
                         
-        while ( pdb(n + 1, j) == 32 )
+        while ( pdb(n + 1, j) == 32 ) % charge j to y column
         
             j = j + 1;
             
@@ -141,7 +135,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
         k = 1;
         
-        while ( pdb(n + 1, j) ~= 32 )
+        while ( pdb(n + 1, j) ~= 32 ) % read the nth y coordinate 
         
             y(k) = pdb(n + 1, j);
             
@@ -150,13 +144,8 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             j = j + 1;
     
         end
-  %          if (n == 152)
-                
- %               y
-          
-%           end
             
-        while ( pdb(n + 1, j) == 32 )
+        while ( pdb(n + 1, j) == 32 ) % charge j to z column
         
             j = j + 1;
             
@@ -164,49 +153,37 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
         k = 1;
         
-        while ( pdb(n + 1, j) ~= 32 )
+        while ( pdb(n + 1, j) ~= 32 ) % read the nth z coordinate
         
             z(k) = pdb(n + 1, j);
 
-            
             k = k + 1;        
+            
             j = j + 1;
     
         end
-            
-      %      if (n == 152)
-                
-     %           z
-                
-    %        end
-            
-        rrr(1, n) = str2double(char(x));
+          
+        rrr(1, n) = str2double(char(x));          % fill the three coordinates of the nth atom  
         rrr(2, n) = str2double(char(y));
         rrr(3, n) = str2double(char(z));
         
- %       if n == 152 
-            
-  %          rrr(1, n) = qrty;
-            
-   %     end        
-    
     end
     
-    ooo = rrr(:, 1);
+    ooo = rrr(:, 1);    % the origin position
     
-    for ( j = 1:length(rrr) )
+    for ( j = 1:length(rrr) ) % shift everything so atom 1 sits at <0, 0, 0>
         
         rrr(:, j) = rrr(:, j) - ooo;
         
     end
     
-    nbndd = zeros(N);
+    nbndd = zeros(N);      % insatiate the nonbonded matrix of atom pair
     
-    for ( j = 1:N )
+    for ( j = 1:N )      %fill it in upper triangular
     
         for ( k = (j + 1):N )
         
-            nbndd(j, k) = 1;
+            nbndd(j, k) = 1; 
             
         end
     
