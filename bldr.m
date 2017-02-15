@@ -189,15 +189,15 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     end
     
-    l = 48;
+    l = 48; % charge the column position to the atom type column
     
-    for ( j = 5:(4 + N) ) 
+    for ( j = 5:(4 + N) ) % Start at line 5 and continue for the length reading in the type names into tt
     
         k = 48;
         
         clear tt;
         
-        while ( psf(j, k) ~= 32 )
+        while ( psf(j, k) ~= 32 ) % read until end of word
             
             tt(k - 47) = psf(j, k);
             
@@ -205,7 +205,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
             if ( k > l )
             
-                l = k;
+	      l = k; % l sees when the column for type name stops, given the longest name
                 
             end
            
@@ -216,11 +216,11 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     for ( j = 5:(4 + N) ) 
     
-        k = l;
+        k = l; % start at the end of the type name column
         
-        while ( psf(j, k) == 32) 
+        while ( psf(j, k) == 32)  % move up to the charge column
         
-            k = k + 1;
+            k = k + 1; 
             
         end
         
@@ -228,7 +228,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
         clear tt;
         
-        while ( psf(j, k) ~= 32 )
+        while ( psf(j, k) ~= 32 ) % read the charge values 
             
             tt(k - h + 1) = psf(j, k);
             
@@ -242,7 +242,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     l = k;
     
-    for ( j = 5:(4 + N) ) 
+    for ( j = 5:(4 + N) ) % read in the mass column
     
         k = l;
         
@@ -268,11 +268,11 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end  
     
-    j = j + 3;
+    j = j + 3; % move down to the directly bonded group blocked
     
     k = 1;
     
-    while ( psf(j, k) == 32 )
+    while ( psf(j, k) == 32 ) %find the first value
     
         k = k + 1;
         
@@ -282,13 +282,13 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
     while ( psf(j, k) > 32 )
 
-        while ( psf(j, k) > 32 )
+        while ( psf(j, k) > 32 ) %run until it falls of the end of the line
         
             l = 1;
         
             clear nn;
         
-            while ( psf(j, k + l - 1) > 32 )
+            while ( psf(j, k + l - 1) > 32 ) % read the value into nn
         
                 nn(l) = psf(j, k + l - 1);
                 
@@ -296,11 +296,11 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
             end
         
-            bb(1, h) = str2double( char(nn) );
+            bb(1, h) = str2double( char(nn) ); % put the value as the first of the ordered pair
             
             k = k + l;
             
-            while ( psf(j, k) == 32 )
+            while ( psf(j, k) == 32 ) % move to the next value
     
                 k = k + 1;
         
@@ -310,7 +310,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
             clear nn;
         
-            while ( psf(j, k + l - 1) > 32 )
+            while ( psf(j, k + l - 1) > 32 ) % read the value 
         
                 nn(l) = psf(j, k + l - 1);
                 
@@ -318,12 +318,12 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
             end
             
-            bb(2, h) = str2double( char( nn ) );
+            bb(2, h) = str2double( char( nn ) ); % put the value as the second entry of the same ordered pair
             
-            h = h + 1;
-            k = k + l;
+            h = h + 1; % increase the ordered pair index
+            k = k + l; % move past the value last read
 
-            while ( psf(j, k) == 32 )
+            while ( psf(j, k) == 32 ) % move to next equation
             
                 k = k + 1;
                 
@@ -331,10 +331,10 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
         end
         
-        k = 1;
-        j = j + 1;
+        k = 1; % start at the left edge
+        j = j + 1; % drop a line down
         
-        while ( psf(j, k) == 32 )
+        while ( psf(j, k) == 32 ) % move over to the first value
         
             k = k + 1;
             
@@ -342,17 +342,17 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end
     
-    j = j + 2;
+    j = j + 2; % drop down to the angle bond block and start at the left edge
     h = 1;
     k = 1;
     
-    while ( psf(j, k) == 32 )
+    while ( psf(j, k) == 32 ) % move up to the first value
     
         k = k + 1;
         
     end  
     
-    while ( psf(j, k) > 32 )
+    while ( psf(j, k) > 32 ) % this code block shoul follow a parallel procedure to the one above
 
         while ( psf(j, k) > 32 )
         
@@ -440,13 +440,13 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     h = 1;
     k = 1;
     
-    while ( psf(j, k) == 32 )
+    while ( psf(j, k) == 32 ) 
     
         k = k + 1;
         
     end  
     
-    while ( psf(j, k) > 32 )
+    while ( psf(j, k) > 32 ) % This block should follow a parallel procedure to the one above
 
         while ( psf(j, k) > 32 )
         
@@ -552,7 +552,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end
    
-    for n = 1:length(dd)
+    for n = 1:length(dd) % eliminate pairs from the non-bonded group belonging to dd
  
         nbndd( dd(1, n), dd(2, n) ) = 0;
         nbndd( dd(1, n), dd(3, n) ) = 0;
@@ -569,7 +569,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     end
     
-    for n = 1:length(aa)
+    for n = 1:length(aa) % elimate pairs from the non-bonded group belonging to aa this would include bb
  
         nbndd( aa(1, n), aa(2, n) ) = 0;
         nbndd( aa(1, n), aa(3, n) ) = 0;

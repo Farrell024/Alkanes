@@ -1,5 +1,7 @@
 function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
-   
+
+  % do nothing if alkane is too small to rotate
+  
     if ( length(rrr) == 4 )
     
         rrrtt = rrr;
@@ -7,19 +9,22 @@ function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
         return;
         
     end
-        
+
+    % determine length of alkane and determine the atom number characteristic of the bond of interest
+    
     N = length(rrr);
     b = fix(b);
     b = 1 + mod(b-1, (N-2)/3-1); 
     M = 1 + 3*b;
    
-    for (j = 1:M) 
-  
+    for (j = 1:M) % for atoms beneath the atom before the bond of interest, do not rotate
+   
         rrrtt(1,j) = rrr(1,j); 
         rrrtt(2,j) = rrr(2,j);
         rrrtt(3,j) = rrr(3,j);  
     
     end
+    
     kr  = 0;
     
     if ( M == 4 )
@@ -27,6 +32,8 @@ function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
         kr = -1;
     
     end
+
+    %create two matrices to rotate around a general direction as determined by the bond of interest
     
     zp = rrr(:, M+1) - rrr(:, M-2+kr);    
     p1 = atan2( zp(1), zp(2) );    
