@@ -264,6 +264,8 @@ function D = dhdrl (m1, m2, m3, m4, tp, rrr)
     p = acosd(c);
     
  %read type and assign parameters
+
+ if ( strcmp( tp(m1), 'CC33A' ) ) 
  
         if ( strcmp( tp(m4), 'CC32A' ) )
         
