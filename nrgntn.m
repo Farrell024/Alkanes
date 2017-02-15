@@ -343,6 +343,6 @@ function D = dhdrl (m1, m2, m3, m4, tp, rrr)
         
     end
     
-    D = sum( k.*( 1 + cosd(n.*p - t) ) ); $ calculate dihedral for all terms
+    D = sum( k.*( 1 + cosd(n.*p - t) ) ); % calculate dihedral for all terms
 
 end
