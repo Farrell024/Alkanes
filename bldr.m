@@ -209,8 +209,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
                 
             end
            
-        end
-        
+	end
         tp{j - 4} = char(tt);
         
     end
