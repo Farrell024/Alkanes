@@ -1,9 +1,9 @@
 function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
-    mlcl = fopen('25.txt');
+    mlcl = fopen('25-1000.pdb');
     mlclst= fopen('25strctr.txt');     % Opens files used for sizing
  
-    mlcl2 = fopen('25.txt');
+    mlcl2 = fopen('25-1000.pdb');
     mlclst2 = fopen('25strctr.txt');   % Opens files used for reading
     
 %    mlcl = fopen('hept.txt');
