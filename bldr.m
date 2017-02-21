@@ -26,7 +26,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
         % Read through file line by line until end, keeping track of longest line, and number of lines
         
-        if ( d ~= -1 | d2 ~= -1 )
+        if ( sum(d ~= -1) | sum(d2 ~= -1) )
 
             if ( MX < max( length(d), length(d2) ) )
         
@@ -57,7 +57,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         d = fgetl(mlcl);
         d2 = fgetl(mlclst);        
         
-        if ( d ~= -1 | d2 ~= -1 )
+        if ( sum(d ~= -1) | sum(d2 ~= -1) )
 
             if (d ~= -1 ) 
             
