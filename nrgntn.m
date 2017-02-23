@@ -20,7 +20,7 @@ function E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to ind
             if ( nbndd(j, k) )                      
                   
                %E = E + LJ( r, tp(j), tp(k) );              
-               E = E + C( r, qq(j) , qq(k) );
+               %E = E + C( r, qq(j) , qq(k) );
                 
             end
                                     
@@ -48,7 +48,7 @@ function E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to ind
 
     for n = 1:length(aa) % do all the angled bonds
 
-    %    E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
+        E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
     
     end
     
@@ -208,7 +208,55 @@ function A = ngl(m1, m2, m3, tp, rrr)
         end
         
     end
+    
+    A = A + ub(m1, m3, tp, rrr);
         
+end
+
+function U = ub(m1, m2, tp, rrr)
+
+    if ( strcmp( tp(m1), 'CC32A' ) ) % read type and assign parameters
+    
+        if ( strcmp( tp(m2), 'CC32A' ) )
+        
+            U = 11.6*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
+            
+        elseif ( strcmp( tp(m1), 'CC33A' ) ) 
+        
+            U = 8*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
+            
+        else
+        
+            U = 22.53*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.179 )^2; 
+        
+        end
+        
+    elseif ( strcmp( tp(m1), 'CC33A' ) )
+    
+         if ( strcmp( tp(m2), 'CC32A' ) )
+            
+            U = 8*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
+    
+        else
+        
+            U = 22.53*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.179 )^2;
+       
+        end 
+    
+    else
+        
+        if ( strcmp( tp(m2), 'CC32A' ) | strcmp( tp(m2), 'CC33A' ) )
+        
+            U = 22.53*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.179 )^2;
+            
+        else
+        
+            U = 5.4*( norm( rrr(:, m1) - rrr(:, m2) ) - 1.802 )^2;   
+            
+        end
+        
+    end
+
 end
 
 function B = bnd(m1, m2, tp, rrr)
@@ -265,7 +313,7 @@ function D = dhdrl (m1, m2, m3, m4, tp, rrr)
     
  %read type and assign parameters
 
- if ( strcmp( tp(m1), 'CC33A' ) ) 
+    if ( strcmp( tp(m1), 'CC33A' ) ) 
  
         if ( strcmp( tp(m4), 'CC32A' ) )
         
