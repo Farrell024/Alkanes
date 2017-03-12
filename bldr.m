@@ -1,16 +1,16 @@
 function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
-    mlcl = fopen('25-1000.pdb');
-    mlclst= fopen('25strctr.txt');     % Opens files used for sizing
+%    mlcl = fopen('25.txt');
+%    mlclst= fopen('25strctr.txt');     % Opens files used for sizing
  
-    mlcl2 = fopen('25-1000.pdb');
-    mlclst2 = fopen('25strctr.txt');   % Opens files used for reading
+%    mlcl2 = fopen('25.txt');
+%    mlclst2 = fopen('25strctr.txt');   % Opens files used for reading
     
-%    mlcl = fopen('hept.txt');
-%    mlclst= fopen('heptstrctr.txt');
+    mlcl = fopen('hept.txt');
+    mlclst= fopen('heptstrctr.txt');
  
-%    mlcl2 = fopen('hept.txt');
-%    mlclst2 = fopen('heptstrctr.txt');  
+    mlcl2 = fopen('hept.txt');
+    mlclst2 = fopen('heptstrctr.txt');  
    
     chk = 0;                          % used to see if end of file has been reached
     
@@ -552,22 +552,22 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end
    
-    for n = 1:length(dd) % eliminate pairs from the non-bonded group belonging to dd
+%    for n = 1:length(dd) % eliminate pairs from the non-bonded group belonging to dd
  
-        nbndd( dd(1, n), dd(2, n) ) = 0;
-        nbndd( dd(1, n), dd(3, n) ) = 0;
-        nbndd( dd(1, n), dd(4, n) ) = 0;
-        nbndd( dd(2, n), dd(3, n) ) = 0;
-        nbndd( dd(2, n), dd(4, n) ) = 0;
-        nbndd( dd(3, n), dd(4, n) ) = 0;
-        nbndd( dd(2, n), dd(1, n) ) = 0;
-        nbndd( dd(3, n), dd(1, n) ) = 0;
-        nbndd( dd(4, n), dd(1, n) ) = 0;
-        nbndd( dd(3, n), dd(2, n) ) = 0;
-        nbndd( dd(4, n), dd(2, n) ) = 0;
-        nbndd( dd(4, n), dd(3, n) ) = 0;
+%        nbndd( dd(1, n), dd(2, n) ) = 0;
+%        nbndd( dd(1, n), dd(3, n) ) = 0;
+%        nbndd( dd(1, n), dd(4, n) ) = 0;
+%        nbndd( dd(2, n), dd(3, n) ) = 0;
+%        nbndd( dd(2, n), dd(4, n) ) = 0;
+%        nbndd( dd(3, n), dd(4, n) ) = 0;
+%        nbndd( dd(2, n), dd(1, n) ) = 0;
+%        nbndd( dd(3, n), dd(1, n) ) = 0;
+%        nbndd( dd(4, n), dd(1, n) ) = 0;
+%        nbndd( dd(3, n), dd(2, n) ) = 0;
+%        nbndd( dd(4, n), dd(2, n) ) = 0;
+%        nbndd( dd(4, n), dd(3, n) ) = 0;
     
-    end
+%    end
     
     for n = 1:length(aa) % elimate pairs from the non-bonded group belonging to aa this would include bb
  

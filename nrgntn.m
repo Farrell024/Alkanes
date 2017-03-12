@@ -1,11 +1,10 @@
 function E = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd)
 
-    E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd); 
-% - nrgntnrw(rrrrf, qq, tp, aa, bb, dd, nbndd); % return the energy from all the contributions, optionally with respect to a reference energy level
+    E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) - nrgntnw(rrrrf, qq, tp, aa, bb, dd, nbndd); % return the energy from all the contributions, optionally with respect to a reference energy level
 
 end
 
-function E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to individual energy components
+function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to individual energy components
 
     E = 0;
     
@@ -18,9 +17,9 @@ function E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to ind
             r = norm( rrr(:,j) - rrr(:,k) );
    
             if ( nbndd(j, k) )                      
-                  
-               %E = E + LJ( r, tp(j), tp(k) );              
-               %E = E + C( r, qq(j) , qq(k) );
+                 
+                E = E + LJ( r, tp(j), tp(k) );              
+   %            E = E + C( r, qq(j) , qq(k) );
                 
             end
                                     
@@ -36,19 +35,19 @@ function E = nrgntnrw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to ind
     
     for n = 1:length(dd) % do all the dihedrals
     
-      %  E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
+  %      E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
     
     end
 
     for n = 1:length(bb) % do all the direct bonds
 
-    %    E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
+ %       E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
     
     end    
 
     for n = 1:length(aa) % do all the angled bonds
 
-        E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
+%       E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
     
     end
     
