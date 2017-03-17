@@ -552,11 +552,11 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end
    
-%    for n = 1:length(dd) % eliminate pairs from the non-bonded group belonging to dd
+    for n = 1:length(dd) % eliminate pairs from the non-bonded group belonging to dd
  
 %        nbndd( dd(1, n), dd(2, n) ) = 0;
 %        nbndd( dd(1, n), dd(3, n) ) = 0;
-%        nbndd( dd(1, n), dd(4, n) ) = 0;
+        nbndd( dd(1, n), dd(4, n) ) = 2;
 %        nbndd( dd(2, n), dd(3, n) ) = 0;
 %        nbndd( dd(2, n), dd(4, n) ) = 0;
 %        nbndd( dd(3, n), dd(4, n) ) = 0;
@@ -567,7 +567,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 %        nbndd( dd(4, n), dd(2, n) ) = 0;
 %        nbndd( dd(4, n), dd(3, n) ) = 0;
     
-%    end
+    end
     
     for n = 1:length(aa) % elimate pairs from the non-bonded group belonging to aa this would include bb
  

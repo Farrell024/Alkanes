@@ -18,8 +18,8 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
    
             if ( nbndd(j, k) )                      
                  
-                E = E + LJ( r, tp(j), tp(k) );              
-   %            E = E + C( r, qq(j) , qq(k) );
+                E = E + LJ( r, tp(j), tp(k), nbndd(j, k) );              
+%                E = E + C( r, qq(j) , qq(k) );
                 
             end
                                     
@@ -35,13 +35,13 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
     
     for n = 1:length(dd) % do all the dihedrals
     
-  %      E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
+%        E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
     
     end
 
     for n = 1:length(bb) % do all the direct bonds
 
- %       E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
+%        E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
     
     end    
 
@@ -53,15 +53,15 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
     
 end
 
-function U = LJ(r, t1, t2)
+function U = LJ(r, t1, t2, f)
 
     %Identify the types, and assign parameters
 			       
     if ( strcmp(t1, 'CC33A') )
         
-        nrgj = .078;
+        nrgj = (2-f)*.078 + (f-1)*.01;
         
-        rmj = 2.08; 
+        rmj = (2-f)*2.08 + (f-1)*1.9; 
         
     elseif ( strcmp(t1, 'HCA3') )
     
@@ -71,9 +71,9 @@ function U = LJ(r, t1, t2)
         
     elseif ( strcmp(t1, 'CC32A') )
     
-        nrgj = .056;
+        nrgj = (2-f)*.056 + (f-1)*.01;
         
-        rmj = 2.01;
+        rmj = (2-f)*2.01 + (f-1)*1.9;
         
     else
     
@@ -84,10 +84,10 @@ function U = LJ(r, t1, t2)
     end
     
     if ( strcmp(t2, 'CC33A') )
+    
+        nrgk = (2-f)*.078 + (f-1)*.01;
         
-        nrgk = .078;
-        
-        rmk = 2.08; 
+        rmk = (2-f)*2.08 + (f-1)*1.9; 
         
     elseif ( strcmp(t2, 'HCA3') )
     
@@ -97,9 +97,9 @@ function U = LJ(r, t1, t2)
         
     elseif ( strcmp(t2, 'CC32A') )
     
-        nrgk = .056;
+        nrgk = (2-f)*.056 + (f-1)*.01;
         
-        rmk = 2.01;
+        rmk = (2-f)*2.01 + (f-1)*1.9;
         
     else
     
