@@ -19,7 +19,7 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
             if ( nbndd(j, k) )                      
                  
                 E = E + LJ( r, tp(j), tp(k), nbndd(j, k) );              
-%                E = E + C( r, qq(j) , qq(k) );
+                E = E + C( r, qq(j) , qq(k) );
                 
             end
                                     
@@ -35,19 +35,19 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
     
     for n = 1:length(dd) % do all the dihedrals
     
-%        E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
+        E = E + dhdrl( dd(1, n), dd(2, n), dd(3, n), dd(4, n), tp, rrr);
     
     end
 
     for n = 1:length(bb) % do all the direct bonds
 
-%        E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
+        E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
     
     end    
 
     for n = 1:length(aa) % do all the angled bonds
 
-%       E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
+       E = E + ngl( aa(1, n), aa(2, n), aa(3, n), tp, rrr);
     
     end
     
