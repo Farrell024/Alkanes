@@ -1,4 +1,4 @@
-function [F, Q] = spnchck(rrr, n, m, k, l, rsltn)
+function E = twnrgs(rrr, n, m, rsltn, qq, tp, aa, bb, dd, nbndd)
 
   rrrrf = rrr;
   
@@ -12,9 +12,7 @@ function [F, Q] = spnchck(rrr, n, m, k, l, rsltn)
     
       rrr = rttntn(rrr, s/2*(2*b-1), m);
       
-      F(a, b) = tbchck(rrrrf, rrr, k, l);
-      
-      Q(:, a, b) = rrr(:, 150);
+      E(a, b) = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd);
   
     end
     
