@@ -1,6 +1,14 @@
 function E = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd)
 
-    E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) - nrgntnw(rrrrf, qq, tp, aa, bb, dd, nbndd); % return the energy from all the contributions, optionally with respect to a reference energy level
+    persistent E0;
+    
+    if isempty(E0)
+    
+      E0 = nrgntnw(rrrrf, qq, tp, aa, bb, dd, nbndd);
+      
+    end
+
+    E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) - E0; % return the energy from all the contributions, optionally with respect to a reference energy level
 
 end
 
