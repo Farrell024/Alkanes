@@ -1,9 +1,15 @@
 function pltntn(rrr)
 
+    N = (length(rrr)-2)/3;
+
     xx = rrr(1,:);
     yy = rrr(2,:);
     zz = rrr(3,:);
    
+    xxcc = zeros(N);
+    yycc = zeros(N);
+    zzcc = zeros(N);
+    
     xxcc(1) = xx(1);
     yycc(1) = yy(1);
     zzcc(1) = zz(1);
@@ -17,8 +23,6 @@ function pltntn(rrr)
     xxhh(3) = xx(4);
     yyhh(3) = yy(4);
     zzhh(3) = zz(4);
-    
-    N = (length(rrr)-2)/3;
     
     m = 5;  
    

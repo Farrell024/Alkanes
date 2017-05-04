@@ -64,7 +64,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             
                 j = j + 1;
         
-                for ( n = 1:length(d) )
+                for  n = 1:length(d) 
         
                     pdb(j, n) = d(n);
                 
@@ -76,7 +76,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
                
                 k = k + 1; 
               
-                for ( n = 1:length(d2) )
+                for  n = 1:length(d2) 
         
                     psf(k, n) = d2(n);
                 
@@ -105,8 +105,11 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     N = N - 2;      % Elimates the line in pdb which is unrelated to the atoms and the +1 overcount from the loop
     
     rrr = zeros(3, N);
+    x = zeros(1, N);
+    z = zeros(1, N);
+    y = zeros(1, N);
     
-    for ( n = 1:N )
+    for  n = 1:N 
     
         j = 27;
     
@@ -172,7 +175,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     ooo = rrr(:, 1);    % the origin position
     
-    for ( j = 1:length(rrr) ) % shift everything so atom 1 sits at <0, 0, 0>
+    for  j = 1:length(rrr)  % shift everything so atom 1 sits at <0, 0, 0>
         
         rrr(:, j) = rrr(:, j) - ooo;
         
@@ -180,9 +183,9 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     nbndd = zeros(N);      % insatiate the nonbonded matrix of atom pair
     
-    for ( j = 1:N )      %fill it in upper triangular
+    for  j = 1:N       %fill it in upper triangular
     
-        for ( k = (j + 1):N )
+        for  k = (j + 1):N 
         
             nbndd(j, k) = 1; 
             
@@ -192,30 +195,40 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     l = 48; % charge the column position to the atom type column
     
-    for ( j = 5:(4 + N) ) % Start at line 5 and continue for the length reading in the type names into tt
+    bb = zeros(1,1);
+    aa = zeros(1,1);
+    dd = zeros(1,1);
+    nn = zeros(1,1);
+    mm = zeros(1,N);
+    qq = zeros(1,N);
+    tt = zeros(1,1);
+    tp = cell(1,N);
+    
+    for  j = 5:(4 + N)  % Start at line 5 and continue for the length reading in the type names into tt
     
         k = 48;
         
         clear tt;
         
         while ( psf(j, k) ~= 32 ) % read until end of word
-            
-            tt(k - 47) = psf(j, k);
-            
-            k = k + 1;
-            
-            if ( k > l )
-            
-	      l = k; % l sees when the column for type name stops, given the longest name
-                
-            end
-           
-	end
+
+                tt(k - 47) = psf(j, k);
+
+                k = k + 1;
+
+                if ( k > l )
+
+                    l = k; % l sees when the column for type name stops, given the longest name
+
+                end
+
+        end
+        
         tp{j - 4} = char(tt);
         
     end
     
-    for ( j = 5:(4 + N) ) 
+    for  j = 5:(4 + N)  
     
         k = l; % start at the end of the type name column
         
@@ -243,7 +256,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     l = k;
     
-    for ( j = 5:(4 + N) ) % read in the mass column
+    for  j = 5:(4 + N)  % read in the mass column
     
         k = l;
         

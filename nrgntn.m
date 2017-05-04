@@ -252,7 +252,7 @@ function U = ub(m1, m2, tp, rrr)
     
     else
         
-        if ( strcmp( tp(m2), 'CC32A' ) | strcmp( tp(m2), 'CC33A' ) )
+        if ( strcmp( tp(m2), 'CC32A' ) || strcmp( tp(m2), 'CC33A' ) )
         
             U = 22.53*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.179 )^2;
             
