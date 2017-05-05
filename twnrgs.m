@@ -14,7 +14,7 @@ function E = twnrgs(rrr, n, m, rsltn, qq, tp, aa, bb, dd, nbndd)
     
     for b = 1:rsltn
     
-      rrr = rttntn(rrrx, s/2 + s, m);
+      rrr = rttntn(rrrx, s/2 + s*b, m);
       
       E(a, b) = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd);
   
