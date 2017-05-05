@@ -8,11 +8,13 @@ function E = twnrgs(rrr, n, m, rsltn, qq, tp, aa, bb, dd, nbndd)
   
   for a = 1:rsltn
   
-    rrr = rttntn(rrrrf, s/2 + s*(2*a-1), n);
+    rrr = rttntn(rrrrf, s/2 + s*a, n);
+    
+    rrrx = rrr;
     
     for b = 1:rsltn
     
-      rrr = rttntn(rrr, s/2 + s, m);
+      rrr = rttntn(rrrx, s/2 + s, m);
       
       E(a, b) = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd);
   
