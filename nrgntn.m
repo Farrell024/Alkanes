@@ -49,7 +49,7 @@ function E = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) % manages the calls to indi
 
     for n = 1:length(bb) % do all the direct bonds
 
-        E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
+       E = E + bnd( bb(1, n), bb(2, n), tp, rrr);
     
     end    
 

@@ -1,6 +1,6 @@
 function f = tbchck(rrrrf, rrr, n, m)
 
-    R = 2.46/pi*sqrt(n*n + n*m + m*m)/2;
+    R = 2.46/pi*sqrt(n*n + n*m + m*m)/2 - 1.7;
     
     a = ( rrrrf(:,1) + rrrrf(:,4) )/2;
     b = ( rrrrf(:,length(rrrrf) - 6) + rrrrf(:,length(rrrrf) - 3) )/2; 

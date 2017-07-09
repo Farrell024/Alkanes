@@ -2,7 +2,7 @@ function F = spnchck(rrr, n, m, k, l, rsltn)
 
   rrrrf = rrr;
   
-  s = 360/(rsltn);
+  s = 360/(rsltn+1);
   
   F = zeros(rsltn);
   

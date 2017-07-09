@@ -1,17 +1,18 @@
 function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
-    mlcl = fopen('hept.txt');
-    mlclst= fopen('heptstrctr.txt');     % Opens files used for sizing
+
+%    mlcl = fopen('hept.txt');
+%    mlclst= fopen('heptstrctr.txt');     % Opens files used for sizing
  
-    mlcl2 = fopen('hept.txt');
-    mlclst2 = fopen('heptstrctr.txt');   % Opens files used for reading
+%    mlcl2 = fopen('hept.txt');
+%    mlclst2 = fopen('heptstrctr.txt');   % Opens files used for reading
     
 
-%    mlcl = fopen('PE25.pdb');
-%    mlclst = fopen('PE25.txt');
+    mlcl = fopen('PE25trnsbldr.pdb');
+    mlclst = fopen('PE25.txt');
  
-%    mlcl2 = fopen('PE25.pdb');
-%    mlclst2 = fopen('PE25.txt');  
+    mlcl2 = fopen('PE25trnsbldr.pdb');
+    mlclst2 = fopen('PE25.txt');  
    
     chk = 0;                          % used to see if end of file has been reached
     

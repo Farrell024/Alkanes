@@ -1,6 +1,6 @@
-function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
+function rrrtt = rttntn(rrr, p, b)
 
-  % do nothing if alkane is too small to rotate
+    % do nothing if alkane is too small to rotate
   
     if ( length(rrr) == 4 )
     
@@ -9,6 +9,20 @@ function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
         return;
         
     end
+    
+   % correct polymer ordering
+    
+    if ( length(rrr) > 14)
+        
+        rrrtmp = zeros(3, 7);
+        
+        rrrtmp(:, 1:3) = rrr(:, end-2:end); 
+        rrrtmp(:, 4:7) = rrr(:, end-6:end-3);
+        
+        rrr(:, end-6:end) = rrrtmp;
+        
+    end
+    
 
     % determine length of alkane and determine the atom number characteristic of the bond of interest
     
@@ -17,7 +31,9 @@ function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
     b = 1 + mod(b-1, (N-2)/3-1); 
     M = 1 + 3*b;
    
-    for (j = 1:M) % for atoms beneath the atom before the bond of interest, do not rotate
+    rrrtt = zeros(3,M);
+    
+    for j = 1:M % for atoms beneath the atom before the bond of interest, do not rotate
    
         rrrtt(1,j) = rrr(1,j); 
         rrrtt(2,j) = rrr(2,j);
@@ -46,10 +62,19 @@ function [rrrtt, RT, t, t1, t2] = rttntn(rrr, p, b)
     
     RT = (t1^-1)*(t2^-1)*t*(t2)*(t1);
     
-    for (j = M+1:N)
+    for j = M+1:N
         
         rrrtt(:,j) = rrr(:, M-2+kr) +  RT*( rrr(:,j) - rrr(:, M-2+kr) ); 
         
     end
+    
+    if ( length(rrr) > 14)
+        
+        rrrtmp(:, 1:4) = rrrtt(:, end-3:end); 
+        rrrtmp(:, 5:7) = rrrtt(:, end-6:end-4);
+        
+        rrrtt(:, end-6:end) = rrrtmp;
+        
+    end    
     
 end
