@@ -1,36 +1,41 @@
-function [rrrm, ee] = grdntdscnt(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd, s)
+function [rrr, dhd, ee] = grdntdscnt(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd, s)
 
-    dbnds =  (length(rrr) - 2)/3 - 1;
-    gg = zeros(1, dbnds);
-        
+    dbnds =  (length(rrr) - 2)/3 - 3;
+    gg = zeros(2, dbnds);
     ee = zeros(1, s);
+    dhd = zeros(s, (length(rrr)-2)/3 -3);
+    dhd(1,:) = plthlndhdrl(rrr);
     
     m = 1;
     
-    while m < s
+    while m <= s
 
-        for n = 1:dbnds
+        gg(1, :) = gg(2, :);
+        
+        for n = 2:dbnds+1
 
-            rrrg = rttntn(rrr, 1, n);
+            rrrg = rttntn(rrr, 1/60, n);
             
-            gg(n) = nrgntn(rrrg, rrr, qq, tp, aa, bb, dd, nbndd);
+            gg(2, n) = (nrgntnw(rrrg, qq, tp, aa, bb, dd, nbndd)-nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd))*60; 
 
         end
+  
+        gg(2,:)
         
-        gg = gg/norm(gg);
+        gmm = 1/12/norm(gg(2,:));
         
-        for n = 1:dbnds
+        for n = 2:dbnds+1
             
-            rrr = rttntn(rrr, -gg(n), n);
+            rrr = rttntn(rrr, -gmm.*gg(2,n), n);
            
         end
+               
+        dhd(m, :) = plthlndhdrl(rrr);
         
-        ee(m) = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd);
+        ee(m) = nrgntnw(rrr, qq, tp, aa, bb, dd, nbndd) - nrgntnw(rrrrf, qq, tp, aa, bb, dd, nbndd);
         
         m = m + 1;
     
     end
-    
-    rrrm = rrr;
-
+ 
 end

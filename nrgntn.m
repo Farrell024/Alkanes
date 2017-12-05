@@ -1,6 +1,26 @@
 function E = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd)
 
     persistent E0;
+
+       % correct polymer ordering
+    
+    if ( length(rrr) > 14)
+        
+        rrrtmp = zeros(3, 7);
+        
+        rrrtmp(:, 1:3) = rrr(:, end-2:end); 
+        rrrtmp(:, 4:7) = rrr(:, end-6:end-3);
+        
+        rrr(:, end-6:end) = rrrtmp;
+        
+        rrrtmp(:, 1:3) = rrrrf(:, end-2:end); 
+        rrrtmp(:, 4:7) = rrrrf(:, end-6:end-3);
+        
+        rrrrf(:, end-6:end) = rrrtmp;
+        
+    end
+    
+    sum(sum(rrr - rrrrf))
     
     if isempty(E0)
     

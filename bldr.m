@@ -1,10 +1,13 @@
 function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
 
-    mlcl = fopen('pe25trnsbldr.pdb');
-    mlclst = fopen('pe25bldr.psf');
+    psfname = 'pe25bldr.psf';
+    pdbname = 'pe25trnsbldr.pdb';
+
+    mlcl = fopen(pdbname);
+    mlclst = fopen(psfname);
  
-    mlcl2 = fopen('pe25trnsbldr.pdb');
-    mlclst2 = fopen('pe25bldr.psf');  
+    mlcl2 = fopen(pdbname);
+    mlclst2 = fopen(psfname);  
    
     chk = 0;                          % used to see if end of file has been reached
     
@@ -275,7 +278,7 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
         
     end  
     
-    j = j + 3; % move down to the directly bonded group blocked
+    j = j + 3; % move down to the directly bonded group block
     
     k = 1;
     
@@ -324,13 +327,13 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
                 l = l + 1;
             
             end
-            
+
             bb(2, h) = str2double( char( nn ) ); % put the value as the second entry of the same ordered pair
             
             h = h + 1; % increase the ordered pair index
             k = k + l; % move past the value last read
 
-            while ( psf(j, k) == 32 ) % move to next equation
+            while ( psf(j, k) == 32 ) % move to next value
             
                 k = k + 1;
                 
@@ -587,6 +590,4 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     
     end
     
-end
-    
-    
+    end

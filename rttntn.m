@@ -68,6 +68,8 @@ function rrrtt = rttntn(rrr, p, b)
         
     end
     
+    %switch back
+    
     if ( length(rrr) > 14)
         
         rrrtmp(:, 1:4) = rrrtt(:, end-3:end); 
