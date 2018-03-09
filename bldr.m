@@ -101,9 +101,9 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
     N = N - 2;      % Elimates the line in pdb which is unrelated to the atoms and the +1 overcount from the loop
     
     rrr = zeros(3, N);
-    x = zeros(1, N);
-    z = zeros(1, N);
-    y = zeros(1, N);
+%    x = zeros(1, N);
+%    z = zeros(1, N);
+%    y = zeros(1, N);
     
     for  n = 1:N 
     
@@ -162,10 +162,18 @@ function [rrr, tp, qq, mm, aa, bb, dd, nbndd, pdb, psf] = bldr()
             j = j + 1;
     
         end
+        
+       % x
+       % str2double(char(x))
           
+      
         rrr(1, n) = str2double(char(x));          % fill the three coordinates of the nth atom  
         rrr(2, n) = str2double(char(y));
         rrr(3, n) = str2double(char(z));
+        
+        clear x;
+        clear y;
+        clear z;
         
     end
     

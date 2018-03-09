@@ -15,7 +15,7 @@ function E = nrgntn(rrr, rrrrf, qq, tp, aa, bb, dd, nbndd)
         
         rrrtmp(:, 1:3) = rrrrf(:, end-2:end); 
         rrrtmp(:, 4:7) = rrrrf(:, end-6:end-3);
-        
+       
         rrrrf(:, end-6:end) = rrrtmp;
         
     end
