@@ -115,7 +115,7 @@ function U = LJ(r, t1, t2, f)
     
         nrgk = (2-f)*.078 + (f-1)*.01;
         
-        rmk = (2-f)*2.08 + (f-1)*1.9; 
+        rmk = (2-f)*2.04 + (f-1)*1.9; 
         
     elseif ( strcmp(t2, 'HCA3') )
     
@@ -166,7 +166,7 @@ function A = ngl(m1, m2, m3, tp, rrr)
 
         if ( strcmp( tp(m3), 'CC32A' ) )
 
-            A = 58.53*( T - 113.6/180*3.1415926536 )^2;
+            A = 58.35*( T - 113.6/180*3.1415926536 )^2;
             
         elseif ( strcmp( tp(m3), 'CC33A' ) )
 
@@ -246,9 +246,9 @@ function U = ub(m1, m2, tp, rrr)
     
         if ( strcmp( tp(m2), 'CC32A' ) )
         
-            U = 11.6*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
+            U = 11.16*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
             
-        elseif ( strcmp( tp(m1), 'CC33A' ) ) 
+        elseif ( strcmp( tp(m2), 'CC33A' ) ) 
         
             U = 8*( norm( rrr(:, m1) - rrr(:, m2) ) - 2.561 )^2;
             
@@ -292,7 +292,7 @@ function B = bnd(m1, m2, tp, rrr)
     
         if ( strcmp( tp(m2), 'CC32A' ) )
         
-            B = 222.5*( norm( rrr(:, m1) - rrr(:, m2) ) - 1.53 )^2;
+            B = 222.5*( norm( rrr(:, m1) - rrr(:, m2) ) - 1.528 )^2;
             
         elseif ( strcmp( tp(m2), 'CC33A' ) )
         
